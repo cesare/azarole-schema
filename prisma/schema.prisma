@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model api_keys {
+  id         Int                        @id @default(autoincrement())
+  user_id    Int
+  name       String
+  digest     String                     @unique(map: "index_api_keys_on_digest")
+  created_at Unsupported("datetime(6)")
+
+  @@index([user_id], map: "index_api_keys_on_user_id")
+}
+
+model ar_internal_metadata {
+  key        String                     @id
+  value      String?
+  created_at Unsupported("datetime(6)")
+  updated_at Unsupported("datetime(6)")
+}
+
+model attendance_records {
+  id           Int                        @id @default(autoincrement())
+  workplace_id Int
+  event        String
+  recorded_at  Unsupported("datetime(6)")
+  created_at   Unsupported("datetime(6)")
+
+  @@index([workplace_id], map: "index_attendance_records_on_workplace_id")
+}
+
+model google_authenticated_users {
+  id         Int                        @id @default(autoincrement())
+  user_id    Int
+  uid        String                     @unique(map: "index_google_authenticated_users_on_uid")
+  created_at Unsupported("datetime(6)")
+
+  @@index([user_id], map: "index_google_authenticated_users_on_user_id")
+}
+
+model schema_migrations {
+  version String @id
+}
+
+model users {
+  id         Int                        @id @default(autoincrement())
+  created_at Unsupported("datetime(6)")
+}
+
+model workplaces {
+  id         Int                        @id @default(autoincrement())
+  user_id    Int
+  name       String
+  created_at Unsupported("datetime(6)")
+  updated_at Unsupported("datetime(6)")
+
+  @@index([user_id], map: "index_workplaces_on_user_id")
+}

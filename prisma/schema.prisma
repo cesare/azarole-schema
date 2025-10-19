@@ -8,7 +8,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model api_keys {
+model ApiKey {
   id         Int                        @id @default(autoincrement())
   user_id    Int
   name       String
@@ -16,6 +16,7 @@ model api_keys {
   created_at Unsupported("datetime(6)")
 
   @@index([user_id], map: "index_api_keys_on_user_id")
+  @@map(name: "api_keys")
 }
 
 model ar_internal_metadata {
@@ -25,7 +26,7 @@ model ar_internal_metadata {
   updated_at Unsupported("datetime(6)")
 }
 
-model attendance_records {
+model AttendanceRecord {
   id           Int                        @id @default(autoincrement())
   workplace_id Int
   event        String
@@ -33,27 +34,31 @@ model attendance_records {
   created_at   Unsupported("datetime(6)")
 
   @@index([workplace_id], map: "index_attendance_records_on_workplace_id")
+  @@map(name: "attendance_records")
 }
 
-model google_authenticated_users {
+model GoogleAuthenticatedUser {
   id         Int                        @id @default(autoincrement())
   user_id    Int
   uid        String                     @unique(map: "index_google_authenticated_users_on_uid")
   created_at Unsupported("datetime(6)")
 
   @@index([user_id], map: "index_google_authenticated_users_on_user_id")
+  @@map(name: "google_authenticated_users")
 }
 
 model schema_migrations {
   version String @id
 }
 
-model users {
+model User {
   id         Int                        @id @default(autoincrement())
   created_at Unsupported("datetime(6)")
+
+  @@map(name: "users")
 }
 
-model workplaces {
+model Workplace {
   id         Int                        @id @default(autoincrement())
   user_id    Int
   name       String
@@ -61,4 +66,5 @@ model workplaces {
   updated_at Unsupported("datetime(6)")
 
   @@index([user_id], map: "index_workplaces_on_user_id")
+  @@map(name: "workplaces")
 }

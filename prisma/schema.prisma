@@ -13,7 +13,7 @@ model ApiKey {
   userId     Int                        @map(name: "user_id")
   name       String
   digest     String                     @unique(map: "index_api_keys_on_digest")
-  createdAt  Unsupported("datetime(6)") @map(name: "created_at")
+  createdAt  DateTime                   @map(name: "created_at")
 
   @@index([userId], map: "index_api_keys_on_user_id")
   @@map(name: "api_keys")
@@ -23,8 +23,8 @@ model AttendanceRecord {
   id           Int                        @id @default(autoincrement())
   workplaceId  Int                        @map(name: "workplace_id")
   event        String
-  recordedAt   Unsupported("datetime(6)") @map(name: "recorded_at")
-  createdAt    Unsupported("datetime(6)") @map(name: "created_at")
+  recordedAt   DateTime                   @map(name: "recorded_at")
+  createdAt    DateTime                   @map(name: "created_at")
 
   @@index([workplaceId], map: "index_attendance_records_on_workplace_id")
   @@map(name: "attendance_records")
@@ -34,7 +34,7 @@ model GoogleAuthenticatedUser {
   id         Int                        @id @default(autoincrement())
   userId     Int                        @map(name: "user_id")
   uid        String                     @unique(map: "index_google_authenticated_users_on_uid")
-  createdAt  Unsupported("datetime(6)") @map(name: "created_at")
+  createdAt  DateTime                   @map(name: "created_at")
 
   @@index([userId], map: "index_google_authenticated_users_on_user_id")
   @@map(name: "google_authenticated_users")
@@ -42,7 +42,7 @@ model GoogleAuthenticatedUser {
 
 model User {
   id         Int                        @id @default(autoincrement())
-  createdAt  Unsupported("datetime(6)") @map(name: "created_at")
+  createdAt  DateTime                   @map(name: "created_at")
 
   @@map(name: "users")
 }
@@ -51,8 +51,8 @@ model Workplace {
   id         Int                        @id @default(autoincrement())
   userId     Int                        @map(name: "user_id")
   name       String
-  createdAt  Unsupported("datetime(6)") @map(name: "created_at")
-  updatedAt  Unsupported("datetime(6)") @map(name: "updated_at")
+  createdAt  DateTime                   @map(name: "created_at")
+  updatedAt  DateTime                   @map(name: "updated_at")
 
   @@index([userId], map: "index_workplaces_on_user_id")
   @@map(name: "workplaces")

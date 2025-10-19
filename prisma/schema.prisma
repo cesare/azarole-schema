@@ -19,13 +19,6 @@ model ApiKey {
   @@map(name: "api_keys")
 }
 
-model ar_internal_metadata {
-  key        String                     @id
-  value      String?
-  created_at Unsupported("datetime(6)")
-  updated_at Unsupported("datetime(6)")
-}
-
 model AttendanceRecord {
   id           Int                        @id @default(autoincrement())
   workplace_id Int
@@ -45,10 +38,6 @@ model GoogleAuthenticatedUser {
 
   @@index([user_id], map: "index_google_authenticated_users_on_user_id")
   @@map(name: "google_authenticated_users")
-}
-
-model schema_migrations {
-  version String @id
 }
 
 model User {

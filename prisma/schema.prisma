@@ -10,50 +10,50 @@ datasource db {
 
 model ApiKey {
   id         Int                        @id @default(autoincrement())
-  user_id    Int
+  userId     Int                        @map(name: "user_id")
   name       String
   digest     String                     @unique(map: "index_api_keys_on_digest")
-  created_at Unsupported("datetime(6)")
+  createdAt  Unsupported("datetime(6)") @map(name: "created_at")
 
-  @@index([user_id], map: "index_api_keys_on_user_id")
+  @@index([userId], map: "index_api_keys_on_user_id")
   @@map(name: "api_keys")
 }
 
 model AttendanceRecord {
   id           Int                        @id @default(autoincrement())
-  workplace_id Int
+  workplaceId  Int                        @map(name: "workplace_id")
   event        String
-  recorded_at  Unsupported("datetime(6)")
-  created_at   Unsupported("datetime(6)")
+  recordedAt   Unsupported("datetime(6)") @map(name: "recorded_at")
+  createdAt    Unsupported("datetime(6)") @map(name: "created_at")
 
-  @@index([workplace_id], map: "index_attendance_records_on_workplace_id")
+  @@index([workplaceId], map: "index_attendance_records_on_workplace_id")
   @@map(name: "attendance_records")
 }
 
 model GoogleAuthenticatedUser {
   id         Int                        @id @default(autoincrement())
-  user_id    Int
+  userId     Int                        @map(name: "user_id")
   uid        String                     @unique(map: "index_google_authenticated_users_on_uid")
-  created_at Unsupported("datetime(6)")
+  createdAt  Unsupported("datetime(6)") @map(name: "created_at")
 
-  @@index([user_id], map: "index_google_authenticated_users_on_user_id")
+  @@index([userId], map: "index_google_authenticated_users_on_user_id")
   @@map(name: "google_authenticated_users")
 }
 
 model User {
   id         Int                        @id @default(autoincrement())
-  created_at Unsupported("datetime(6)")
+  createdAt  Unsupported("datetime(6)") @map(name: "created_at")
 
   @@map(name: "users")
 }
 
 model Workplace {
   id         Int                        @id @default(autoincrement())
-  user_id    Int
+  userId     Int                        @map(name: "user_id")
   name       String
-  created_at Unsupported("datetime(6)")
-  updated_at Unsupported("datetime(6)")
+  createdAt  Unsupported("datetime(6)") @map(name: "created_at")
+  updatedAt  Unsupported("datetime(6)") @map(name: "updated_at")
 
-  @@index([user_id], map: "index_workplaces_on_user_id")
+  @@index([userId], map: "index_workplaces_on_user_id")
   @@map(name: "workplaces")
 }
